@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/badoux/checkmail"
+	"github.com/jinzhu/gorm"
 
 	"golang.org/x/crypto/bcrypt"
 )
@@ -78,7 +79,49 @@ func (u *User) Validate(action string) error {
 		return nil
 
 	default:
-		//wait tommorow
+		if u.UserName == "" {
+			return errors.New("Please input Username")
+		}
+		if u.Password == "" {
+			return errors.New("Please input Password")
+		}
+		if u.Email == "" {
+			return errors.New("Please input Email")
+		}
+		if err := checkmail.ValidateFormat(u.Email); err != nil {
+			return errors.New("Invalid Email")
+		}
 		return nil
 	}
+}
+
+func (u *User) SaveUser(db *gorm.DB) (*User, error) {
+	var err error
+	err = db.Debug().Create(&u).Error
+	if err != nil {
+		return &User{}, err
+	}
+	return u, nil
+}
+
+func (u *User) FindAllUsers(db *gorm.DB) (*[]User, error) {
+	var err error
+	users := []User{}
+	err = db.Debug().Model(&User{}).Limit(100).Find(&users).Error
+	if err != nil {
+		return &[]User{}, err
+	}
+	return &users, err
+}
+
+func (u *User) FindUserByID(db *gorm.DB, uid uint32) (*User, error) {
+	var err error
+	err = db.Debug().Model(User{}).Where("id= ?", uid).Take(&u).Error
+	if err != nil {
+		return &User{}, err
+	}
+	if gorm.IsRecordNotFoundError(err) {
+		return &User{}, errors.New("User Not Found")
+	}
+	return u, err
 }
