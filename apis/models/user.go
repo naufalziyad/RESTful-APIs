@@ -19,8 +19,8 @@ type User struct {
 	UserName  string    `gorm:"size:255;not null; unique" json:"username"`
 	Email     string    `gorm:"size:100;not null; unique" json:"email"`
 	Password  string    `gorm:"size:100;not null;" json:"password"`
-	CreatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"created_at`
-	UpdatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"updatet_at`
+	CreatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"created_at"`
+	UpdatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"updated_at"`
 }
 
 func Hash(password string) ([]byte, error) {
