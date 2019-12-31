@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/naufalziyad/RESTful-APIs/apis/auth"
-	"github.com/naufalziyad/RESTful-APIs/apis/responses"
+	"github.com/naufalziyad/RESTful-APIs/apis/helpers/responses"
 )
 
 func MiddlewareJSON(next http.HandlerFunc) http.HandlerFunc {
