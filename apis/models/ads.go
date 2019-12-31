@@ -81,6 +81,11 @@ func (a *Ads) FindAllAds(db *gorm.DB) (*[]Ads, error) {
 func (a *Ads) FindAdsByID(db *gorm.DB, pid uint64) (*Ads, error) {
 	var err error
 	err = db.Debug().Model(&Ads{}).Where("id = ?", pid).Take(&a).Error
+
+	if gorm.IsRecordNotFoundError(err) {
+		return &Ads{}, errors.New("Ads Not Found")
+	}
+
 	if err != nil {
 		return &Ads{}, err
 	}
