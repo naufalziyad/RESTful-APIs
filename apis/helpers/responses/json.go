@@ -18,7 +18,7 @@ func ERROR(w http.ResponseWriter, statusCode int, err error) {
 	if err != nil {
 
 		JSON(w, statusCode, struct {
-			Error string `json:"error"`
+			Error string `json:"result"`
 		}{
 			Error: err.Error(),
 		})
