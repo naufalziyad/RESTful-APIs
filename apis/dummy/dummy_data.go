@@ -20,6 +20,12 @@ var users = []models.User{
 		Email:    "shanaya@gmail.com",
 		Password: "rahasia2nih",
 	},
+	models.User{
+		UserName: "sini",
+		FullName: "Sini Sekar S",
+		Email:    "sini@gmail.com",
+		Password: "rahasia3nih",
+	},
 }
 
 var ads = []models.Ads{
@@ -32,6 +38,16 @@ var ads = []models.Ads{
 		Title:   "Belanja di Shanaya store",
 		Content: "Rebut hadiahnya , dapat untungnya",
 		AdsLink: "http://shanaya.store",
+	},
+	models.Ads{
+		Title:   "Belanja di sini store",
+		Content: "Rebut hadiahnya , dapat untungnya",
+		AdsLink: "http://sini.store",
+	},
+	models.Ads{
+		Title:   "Toko sini saja",
+		Content: "Rebut hadiahnya yuk",
+		AdsLink: "http://toko-sini.store",
 	},
 }
 
